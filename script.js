@@ -22,7 +22,7 @@ formbutton.addEventListener("click",(event)=>{
     let name = document.getElementById("name").value
     let age = document.getElementById("age").value
     //validation
-    if(name == "" || age == ""){
+    if(name == "" && age == ""){
         alert("please fill all the fields")
     }else{
         promiseApi(name,age)
