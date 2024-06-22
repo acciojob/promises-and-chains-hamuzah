@@ -1,31 +1,34 @@
-let formbutton = document.getElementById("btn");
-function promiseApi1(name , age)
-{
- return new Promise((resolve , reject) => {
-    if(age > 18)
-    {
-        setTimeout(() => {
-            resolve(
-                alert(`welcome , ${name}, You can vote`)
-                // console.log(`You can vote , ${name}`)
-            )
-        } , 4000)
-    }
-    else
-    {
-        alert(`Oh sorry ${name}. You aren't old enough.`)
-    }
- })
-}
-formbutton.addEventListener("click" , (event) => {
-    event.preventDefault();
-    let nameinput = document.getElementById("name").value;
-    let ageinput = document.getElementById("age").value;
-    if (nameinput == "" && ageinput == "") {
-        alert("It should not be empty")
-    }
-    else
-    {
-        promiseApi1(nameinput , ageinput);
-    }
-})
+document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('myForm');
+            const nameInput = document.getElementById('name');
+            const ageInput = document.getElementById('age');
+            const btn = document.getElementById('btn');
+ 
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+ 
+                const name = nameInput.value;
+                const age = parseInt(ageInput.value);
+ 
+                if (!name || !age) {
+                    alert('Please fill out all fields.');
+                    return;
+                }
+ 
+                const promise = new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        if (age >= 18) {
+                            alert(`Welcome, ${name}. You can vote.`);
+                            resolve();
+                        } else {
+                            alert(`Oh sorry ${name}. You aren't old enough.`);
+                            reject();
+                        }
+                    }, 4000);
+                });
+ 
+                promise.catch(() => {
+                    // Handle promise rejection if needed
+                });
+            });
+        });
